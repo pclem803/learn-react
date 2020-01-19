@@ -1,25 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import {
+  Image,
+  Box,
+  Column,
+  Button,
+  Container,
+  Title,
+  Notification,
+  Content,
+  Modal,
+  Card,
+  Heading
+} from "rbx";
+import "rbx/index.css";
+import Banner from "./Banner";
+import LoadItems from "./LoadItems";
 
 function App() {
+  const [data, setData] = useState({});
+
+  const products = Object.values(data);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const response = await fetch("./data/products.json");
+      const json = await response.json();
+      setData(json);
+    };
+    fetchProducts();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Banner />
+      <LoadItems products = {products}/>
+    </Container>
   );
 }
 
