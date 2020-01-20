@@ -53,6 +53,7 @@ const CartProduct = ({ item, cartState, openState }) => {
                   let product = item
                   let operation = 1
                   AddtoCart({ product, cartState, size, operation });
+                  
                   return(0)
               }}>
                 +
