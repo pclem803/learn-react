@@ -12,8 +12,9 @@ import {
   Column
 } from "rbx";
 import MakeDesc from "./MakeDesc";
+import MakeButtons from './MakeButtons'
 
-const LoadItems = ({ products }) => {
+const LoadItems = ({ products, cartState, openState }) => {
   return (
     <React.Fragment>
       <Column.Group breakpoint="desktop" multiline gapSize={6}>
@@ -23,6 +24,7 @@ const LoadItems = ({ products }) => {
               <Content>{this_product.title}</Content>
               <GetImage code={this_product.sku} />
               <MakeDesc code={this_product} />
+              <MakeButtons product={this_product} cartState={cartState} openState={openState}/>
             </Box>
           </Column>
         ))}
