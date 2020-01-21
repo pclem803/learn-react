@@ -1,56 +1,68 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "rbx/index.css";
 import {
-  Image,
-  Box,
-  Notification,
-  Title,
-  Content,
-  Block,
-  Message,
   Button,
-  Column
 } from "rbx";
 import AddtoCart from './AddToCart'
+import MutateInventory from './MutateInventory'
 
-const MakeButtons = ({ product, cartState, openState }) => {
-    let operation = 1;
-  return (
-    <Button.Group hasAddons align="centered" size="large" color="warning">
-      <Button color="warning" inverted outlined
-      onClick={() => {
-        let size = "S";
-        AddtoCart({ product, cartState, size, operation });
-        openState.openCart(true)
-      }}>
-        S
-      </Button>
-      <Button color="warning" inverted outlined
-      onClick={() => {
-        let size = "M";
-        AddtoCart({ product, cartState, size, operation });
-        openState.openCart(true)
-      }}>
-        M
-      </Button>
-      <Button color="warning" inverted outlined
-      onClick={() => {
-        let size = "L";
-        AddtoCart({ product, cartState, size, operation });
-        openState.openCart(true)
-      }}>
-        L
-      </Button>
-      <Button color="warning" inverted outlined
-      onClick={() => {
-        let size = "XL";
-        AddtoCart({ product, cartState, size, operation });
-        openState.openCart(true)
-      }}>
-        XL
-      </Button>
-    </Button.Group>
-  );
+const MakeButtons = ({ product, cartState, openState, stockState }) => {
+  let operation = 1;
+  let stock_operation = -1
+  let key = product.sku.toString()
+  let object_stock = stockState.inventory[key]
+  if (object_stock){
+    if (object_stock["S"]===0 && object_stock["M"]===0 && object_stock["L"]===0 && object_stock["XL"]===0){
+      return (
+        <Button fullwidth color="warning" size="large" disabled>Out of Stock</Button>
+      )
+    }
+    return (
+      <Button.Group hasAddons align="centered" size="large" color="warning" >
+        <Button color="warning" inverted outlined disabled={!(object_stock["S"])}
+        onClick={() => {
+          let size = "S";
+          AddtoCart({ product, cartState, size, operation });
+          openState.openCart(true)
+          MutateInventory({stockState, product, stock_operation, size})
+        }}>
+          S
+        </Button>
+        <Button color="warning" inverted outlined disabled={!(object_stock["M"])}
+        onClick={() => {
+          let size = "M";
+          AddtoCart({ product, cartState, size, operation });
+          openState.openCart(true)
+          MutateInventory({stockState, product, stock_operation, size})
+        }}>
+          M
+        </Button>
+        <Button color="warning" inverted outlined disabled={!(object_stock["L"])}
+        onClick={() => {
+          let size = "L";
+          AddtoCart({ product, cartState, size, operation });
+          openState.openCart(true)
+          MutateInventory({stockState, product, stock_operation, size})
+        }}>
+          L
+        </Button>
+        <Button color="warning" inverted outlined disabled={!(object_stock["XL"])}
+        onClick={() => {
+          let size = "XL";
+          AddtoCart({ product, cartState, size, operation });
+          openState.openCart(true)
+          MutateInventory({stockState, product, stock_operation, size})
+        }}>
+          XL
+        </Button>
+      </Button.Group>
+    );
+  }
+  else{
+    return(
+      <Button fullwidth state="loading" color="warning"></Button>
+    )
+  }
 };
 
 export default MakeButtons;

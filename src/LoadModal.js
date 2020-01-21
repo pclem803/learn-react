@@ -1,25 +1,15 @@
 import React, { useEffect, useState } from "react";
 import {
-  Image,
-  Box,
-  Column,
-  Button,
-  Container,
-  Title,
-  Notification,
-  Content,
   Modal,
-  Card,
-  Heading
 } from "rbx";
 import LoadCart from './LoadCart'
 
-const LoadModal = ({openState, cartState})=>{
+const LoadModal = ({openState, cartState, stockState})=>{
     return(
         <Modal active={openState.open}>
         <Modal.Background onClick={() => openState.openCart(false)} />
         <Modal.Content>
-            <LoadCart openState={openState} cartState = {cartState}/>
+            <LoadCart openState={openState} cartState = {cartState} stockState={stockState}/>
         </Modal.Content>
         <Modal.Close onClick={() => openState.openCart(false)} />
       </Modal>

@@ -1,20 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "rbx/index.css";
 import {
   Image,
   Box,
-  Notification,
-  Title,
   Content,
-  Block,
-  Message,
-  Button,
   Column
 } from "rbx";
 import MakeDesc from "./MakeDesc";
 import MakeButtons from './MakeButtons'
 
-const LoadItems = ({ products, cartState, openState }) => {
+const LoadItems = ({ products, cartState, openState, stockState }) => {
   return (
     <React.Fragment>
       <Column.Group breakpoint="desktop" multiline gapSize={6}>
@@ -24,7 +19,7 @@ const LoadItems = ({ products, cartState, openState }) => {
               <Content>{this_product.title}</Content>
               <GetImage code={this_product.sku} />
               <MakeDesc code={this_product} />
-              <MakeButtons product={this_product} cartState={cartState} openState={openState}/>
+              <MakeButtons product={this_product} cartState={cartState} openState={openState} stockState={stockState}/>
             </Box>
           </Column>
         ))}

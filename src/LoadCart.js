@@ -1,20 +1,13 @@
 import React, { useEffect, useState } from "react";
 import {
-  Image,
-  Box,
-  Column,
   Button,
-  Container,
   Title,
   Notification,
   Content,
-  Modal,
-  Card,
-  Heading
 } from "rbx";
 import CartProduct from "./CartProduct";
 
-const LoadCart = ({ openState, cartState }) => {
+const LoadCart = ({ openState, cartState, stockState }) => {
   let user_total = FormatMoney(GetTotal(cartState));
   let period = user_total.indexOf(".");
   user_total = user_total.substr(0, period + 3);
@@ -32,6 +25,7 @@ const LoadCart = ({ openState, cartState }) => {
       </Content>
     );
   }
+
   return (
     <Content>
       <Notification color="light">
@@ -44,6 +38,7 @@ const LoadCart = ({ openState, cartState }) => {
               item={item}
               cartState={cartState}
               openState={openState}
+              stockState={stockState}
             />
           ))}
         </Notification>

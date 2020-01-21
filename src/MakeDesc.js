@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "rbx/index.css";
 import {
-  Box,
-  Notification,
-  Title,
   Content,
-  Block,
-  Message,
-  Button,
-  Column
 } from "rbx";
 
 const MakeDesc = ({ code, addState, cartState }) => {
