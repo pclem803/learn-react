@@ -60,7 +60,7 @@ const MakeButtons = ({ product, cartState, openState, stockState }) => {
   }
   else{
     return(
-      <Button fullwidth state="loading" color="warning"></Button>
+      <Button size="large" fullwidth state="loading" color="warning"></Button>
     )
   }
 };

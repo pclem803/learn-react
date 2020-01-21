@@ -9,11 +9,26 @@ import LoadModal from './LoadModal'
 import firebase from 'firebase/app';
 import 'firebase/database';
 
+const firebaseConfig = {
+  apiKey: "AIzaSyAKtSbdBxQlY_vLPIvXJKSO7qe8EcfF9sE",
+  authDomain: "clement-cart-f3a8b.firebaseapp.com",
+  databaseURL: "https://clement-cart-f3a8b.firebaseio.com",
+  projectId: "clement-cart-f3a8b",
+  storageBucket: "clement-cart-f3a8b.appspot.com",
+  messagingSenderId: "264854384177",
+  appId: "1:264854384177:web:fcd9ce4bb98d569fc52f10",
+  measurementId: "G-M2NZP82RVD"
+};
+firebase.initializeApp(firebaseConfig);
+var db = firebase.database().ref();
+
+
 function App() {
   const [data, setData] = useState({});
   const [open, openCart] = useState(false);
   const [cart, setCart]= useState([])
   const [inventory, setInventory] = useState([])
+  const [user, setUser]=useState()
 
 
   const products = Object.values(data);
@@ -27,12 +42,15 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const fetchInventory = async () => {
-      const response = await fetch("./data/inventory.json");
-      const json = await response.json();
-      setInventory(json);
+    const handleData = snap => {
+      if (snap.val()) {
+        setInventory(addInventory(snap.val()).inventory);
+      }
     };
-    fetchInventory();
+    db.on("value", handleData, error => alert(error));
+    return () => {
+      db.off("value", handleData);
+    };
   }, []);
 
   return (
@@ -43,5 +61,10 @@ function App() {
     </Container>
   );
 }
+
+const addInventory = helper =>({
+  inventory: helper.Inventory,
+  users: helper.users
+})
 
 export default App;
