@@ -6,6 +6,8 @@ import {
   Content,
 } from "rbx";
 import CartProduct from "./CartProduct";
+import setDataBase from './setDataBase'
+
 
 const LoadCart = ({ openState, cartState, stockState, userState }) => {
   let user_total = FormatMoney(GetTotal(cartState));
@@ -48,7 +50,14 @@ const LoadCart = ({ openState, cartState, stockState, userState }) => {
           size="medium"
           fullwidth
           color="warning"
-          onClick={() => alert("Your total is: $" + user_total)}
+          onClick={() => {
+            alert("Your total is: $" + user_total)
+            cartState.setCart([])
+            openState.openCart(false)
+            let thing = [];
+            setDataBase({ userState, thing });
+            return
+        }}
         >
           Checkout
         </Button>
