@@ -7,7 +7,7 @@ import {
 } from "rbx";
 import CartProduct from "./CartProduct";
 
-const LoadCart = ({ openState, cartState, stockState }) => {
+const LoadCart = ({ openState, cartState, stockState, userState }) => {
   let user_total = FormatMoney(GetTotal(cartState));
   let period = user_total.indexOf(".");
   user_total = user_total.substr(0, period + 3);
@@ -39,6 +39,7 @@ const LoadCart = ({ openState, cartState, stockState }) => {
               cartState={cartState}
               openState={openState}
               stockState={stockState}
+              userState= {userState}
             />
           ))}
         </Notification>

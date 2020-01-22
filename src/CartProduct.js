@@ -3,7 +3,7 @@ import { Image, Column, Button, Notification, Content } from "rbx";
 import AddtoCart from "./AddToCart";
 import MutateInventory from './MutateInventory'
 
-const CartProduct = ({ item, cartState, openState, stockState }) => {
+const CartProduct = ({ item, cartState, openState, stockState, userState }) => {
   let total_price = FormatMoney(item.price);
   let size = item.size;
 
@@ -42,7 +42,7 @@ const CartProduct = ({ item, cartState, openState, stockState }) => {
                   let product = item;
                   let operation = -1;
                   let stock_operation = 1;
-                  AddtoCart({ product, cartState, size, operation });
+                  AddtoCart({ product, cartState, size, operation, userState });
                   MutateInventory({stockState, product, stock_operation, size})
                   return 0;
                 }}
@@ -60,7 +60,7 @@ const CartProduct = ({ item, cartState, openState, stockState }) => {
                   let product = item;
                   let operation = 1;
                   let stock_operation = -1;
-                  AddtoCart({ product, cartState, size, operation });
+                  AddtoCart({ product, cartState, size, operation, userState });
                   MutateInventory({stockState, product, stock_operation, size})
                   return 0;
                 }}

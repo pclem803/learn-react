@@ -6,7 +6,7 @@ import {
 import AddtoCart from './AddToCart'
 import MutateInventory from './MutateInventory'
 
-const MakeButtons = ({ product, cartState, openState, stockState }) => {
+const MakeButtons = ({ product, cartState, openState, stockState, userState }) => {
   let operation = 1;
   let stock_operation = -1
   let key = product.sku.toString()
@@ -22,7 +22,7 @@ const MakeButtons = ({ product, cartState, openState, stockState }) => {
         <Button color="warning" inverted outlined disabled={!(object_stock["S"])}
         onClick={() => {
           let size = "S";
-          AddtoCart({ product, cartState, size, operation });
+          AddtoCart({ product, cartState, size, operation, userState });
           openState.openCart(true)
           MutateInventory({stockState, product, stock_operation, size})
         }}>
@@ -31,7 +31,7 @@ const MakeButtons = ({ product, cartState, openState, stockState }) => {
         <Button color="warning" inverted outlined disabled={!(object_stock["M"])}
         onClick={() => {
           let size = "M";
-          AddtoCart({ product, cartState, size, operation });
+          AddtoCart({ product, cartState, size, operation, userState });
           openState.openCart(true)
           MutateInventory({stockState, product, stock_operation, size})
         }}>
@@ -40,7 +40,7 @@ const MakeButtons = ({ product, cartState, openState, stockState }) => {
         <Button color="warning" inverted outlined disabled={!(object_stock["L"])}
         onClick={() => {
           let size = "L";
-          AddtoCart({ product, cartState, size, operation });
+          AddtoCart({ product, cartState, size, operation, userState });
           openState.openCart(true)
           MutateInventory({stockState, product, stock_operation, size})
         }}>
@@ -49,7 +49,7 @@ const MakeButtons = ({ product, cartState, openState, stockState }) => {
         <Button color="warning" inverted outlined disabled={!(object_stock["XL"])}
         onClick={() => {
           let size = "XL";
-          AddtoCart({ product, cartState, size, operation });
+          AddtoCart({ product, cartState, size, operation, userState });
           openState.openCart(true)
           MutateInventory({stockState, product, stock_operation, size})
         }}>
