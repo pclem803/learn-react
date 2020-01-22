@@ -56,7 +56,7 @@ const LoadCart = ({ openState, cartState, stockState, userState }) => {
             openState.openCart(false)
             let thing = [];
             setDataBase({ userState, thing });
-            return
+            return;
         }}
         >
           Checkout
